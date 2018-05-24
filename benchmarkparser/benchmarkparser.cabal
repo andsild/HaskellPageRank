@@ -1,0 +1,38 @@
+name:                benchmarkparser
+version:             0.1.0.0
+synopsis:            meh
+-- description:
+homepage:            https://github.com/andsild/NEW_URL
+license:             BSD3
+license-file:        LICENSE
+author:              Anders Sildnes
+maintainer:          andsild@posteo.net
+-- copyright:
+category:            Concurrency
+build-type:          Simple
+extra-source-files:  ChangeLog.md
+cabal-version:       >=1.10
+
+Flag debug
+  Description: Enable debug logging
+  Default:     False
+
+executable benchmarkparser
+  main-is:      Main.hs
+  other-extensions:    BangPatterns, OverloadedStrings, ScopedTypeVariables, NamedFieldPuns
+
+  ghc-options:         -fwarn-incomplete-patterns
+  if flag(debug)
+      CC-Options: "-DDEBUG"
+      CPP-Options: -DDEBUG
+  build-depends:       base
+                       , MissingH
+                       , bytestring
+                       , cassava
+                       , internalutil
+                       , split
+                       , stringsearch
+                       , vector
+  hs-source-dirs:      .
+  default-language:    Haskell2010
+

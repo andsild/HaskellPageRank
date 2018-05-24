@@ -1,0 +1,78 @@
+name:                graphcoloring
+version:             0.1.0.0
+synopsis:            meh
+-- description:
+homepage:            https://github.com/andsild/TODOFIXTITLE
+license:             BSD3
+license-file:        LICENSE
+author:              Anders Sildnes
+maintainer:          andsild@posteo.net
+-- copyright:
+category:            Concurrency
+build-type:          Simple
+extra-source-files:  ChangeLog.md
+cabal-version:       >=1.10
+
+Flag debug
+  Description: Enable debug support
+  Default:     False
+
+test-suite Gentest
+  main-is: TestMain.hs
+  hs-source-dirs: Data
+  other-modules:
+   Data.Graph.GraphColoring
+   , Data.Graph.Prism
+   , Test.Data.Graph.TestGraphColoring
+   , Test.Data.Graph.TestGraphColoring2Dist
+   , Test.Data.Graph.TestGraphColoringNonDet
+   , Test.Data.Graph.TestPrism
+   , Test.ColoringGraphs
+  type: exitcode-stdio-1.0
+  hs-source-dirs: ., Test
+  build-depends:
+    base
+    , HUnit
+    , MonadRandom
+    , bytestring
+    , containers
+    , deepseq
+    , ghc-prim
+    , hashtables
+    , heredoc
+    , internalutil
+    , lvish
+    , primitive
+    , repa
+    , vector
+    , vector-algorithms
+  default-language:    Haskell2010
+  CC-Options: "-DDEBUG"
+  CPP-Options: -DDEBUG
+
+library
+  other-extensions:    CPP, BangPatterns, OverloadedStrings, ScopedTypeVariables, NamedFieldPuns
+
+  ghc-options:         -fwarn-incomplete-patterns
+  if flag(debug)
+      CC-Options: "-DDEBUG"
+      CPP-Options: -DDEBUG
+  hs-source-dirs: Data
+  exposed-modules:
+    Data.Graph.GraphColoring
+    , Data.Graph.Prism
+  build-depends:
+    base
+    , MonadRandom
+    , containers
+    , deepseq
+    , ghc-prim
+    , hashtables
+    , internalutil
+    , lvish
+    , primitive
+    , repa
+    , vector
+    , vector-algorithms
+  hs-source-dirs:      .
+  default-language:    Haskell2010

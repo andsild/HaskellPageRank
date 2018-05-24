@@ -1,0 +1,66 @@
+name:                internalutil
+version:             0.1.0.0
+synopsis:            meh
+-- description:
+homepage:            https://github.com/andsild/_lvars
+license:             BSD3
+license-file:        LICENSE
+author:              Anders Sildnes
+maintainer:          andsild@posteo.net
+-- copyright:
+category:            Concurrency
+build-type:          Simple
+extra-source-files:  ChangeLog.md
+cabal-version:       >=1.10
+
+Flag debug
+  Description: Enable debug support
+  Default:     False
+
+test-suite Gentest
+  main-is: TestMain.hs
+  other-modules:
+   Data.Graph.EdgeArray
+   , Data.Graph.NeighborGraph
+   , Test.Graphs
+   , Data.Graph.TestGraphParser
+  type: exitcode-stdio-1.0
+  hs-source-dirs: ., Test
+  build-depends:
+    base
+    , HUnit
+    , bytestring
+    , deepseq
+    , ghc-prim
+    , heredoc
+    , vector
+  default-language:    Haskell2010
+  CC-Options: "-DDEBUG"
+  CPP-Options: -DDEBUG
+
+library
+  other-extensions:    CPP, BangPatterns, OverloadedStrings, ScopedTypeVariables, NamedFieldPuns
+
+  ghc-options:         -fwarn-incomplete-patterns
+  if flag(debug)
+      CC-Options: "-DDEBUG"
+      CPP-Options: -DDEBUG
+  hs-source-dirs: Data/Graph, Data/Util
+  exposed-modules:
+    Data.Graph.EdgeArray
+    , Data.Graph.NeighborGraph
+    , Data.Util.ArrayUtils
+    , Graphviz.GraphColoring
+  build-depends:
+    base
+    , bytestring
+    , deepseq
+    , fgl
+    , ghc-prim
+    , graphviz
+    , process
+    , repa
+    , text
+    , vector
+  hs-source-dirs:      .
+  default-language:    Haskell2010

@@ -1,0 +1,9 @@
+---
+language: nix
+sudo: false
+git:
+  submodules: true
+
+script:
+  - nix-shell --pure shell.nix --command "stack test --no-terminal"
+...

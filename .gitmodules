@@ -1,0 +1,18 @@
+[submodule "haskell/concurrent-skiplist"]
+	path = deps/concurrent-skiplist
+	url = git@github.com:rrnewton/concurrent-skiplist.git
+[submodule "haskell/ctrie"]
+	path = deps/ctrie
+	url = git@github.com:iu-parfunc/ctrie.git
+[submodule "haskell/haskell-lockfree"]
+	path = deps/haskell-lockfree
+	url = git@github.com:rrnewton/haskell-lockfree.git
+[submodule "haskell/lvars"]
+	path = deps/lvars
+	url = git@github.com:iu-parfunc/lvars.git
+[submodule "haskell/criterion"]
+	path = deps/criterion
+	url = git@github.com:andsild/criterion.git
+[submodule "haskell/tslogger"]
+    path = deps/tslogger
+    url = git@github.com:iu-parfunc/tslogger.git

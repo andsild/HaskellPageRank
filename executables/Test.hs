@@ -1,0 +1,63 @@
+{-# LANGUAGE BangPatterns #-}
+module Test where
+
+-- import Data.Graph.GraphColoring (Color, GraphColoring)
+-- import           Data.Graph.NeighborGraph (NeighborGraph, NodeID)
+-- import Data.Util.ArrayUtils
+--
+-- import Control.Monad (when, void)
+-- import Control.Monad.Primitive (PrimMonad, PrimState)
+-- import qualified Data.Vector                  as V
+-- import qualified Data.Vector.Unboxed          as U
+-- import qualified Data.Vector.Unboxed.Mutable  as MU
+-- import qualified Data.Vector.Mutable  as M
+--
+-- import Control.Concurrent
+-- import Control.Monad.ST
+-- import Control.Monad.Par
+-- -- import Control.LVish.DeepFrz (DeepFrz, FrzType, Frzn, NonFrzn, Trvrsbl)
+-- -- import Control.LVish (NoFreeze, NoIO, Par, isDet, runPar, fork, HasPut)
+-- import qualified Data.LVar.IVar as IV
+-- import qualified Data.LVar.SLSet as S
+-- import qualified Data.LVar.IStructure as IS
+--
+-- import qualified Data.Array.Repa as R
+-- import qualified Data.Array.Repa.Eval.Gang as RG
+--
+-- operateOnListInThreads :: Int -> IO (U.Vector Int)
+-- operateOnListInThreads size = do
+--   mli <- MU.replicate size 0
+--   let !threads = RG.gangSize RG.theGang
+--   let nbrs = U.fromList [ 0,1,2,3,4,5,6,7,8,9 ] :: U.Vector Int
+--   let !chunkSize = U.length nbrs `div` threads
+--
+--   RG.gangIO RG.theGang 
+--     (\nThread -> let chunkStart = nstart (U.length nbrs) nThread
+--                      chunkEnd = nstart (U.length nbrs) (succ nThread)
+--                       in doSomethingWithMli mli nThread chunkStart (chunkEnd-chunkStart) nbrs)
+--
+--   U.unsafeFreeze mli
+--
+-- doSomethingWithMli :: MU.IOVector Int -> Int -> Int -> Int -> U.Vector Int -> IO ()
+-- doSomethingWithMli mli threadId chunkStart chunkSize nbrs =
+--   U.mapM_ (\i -> MU.write mli i (succ threadId)) (U.slice chunkStart chunkSize nbrs)
+--
+--
+-- operateOnListRepa :: R.Array R.U R.DIM1 Int -> R.Array R.U R.DIM1 Int
+-- operateOnListRepa li =
+--   let lenli = R.size (R.extent li) - 2
+--       range1' = [2,4..lenli]
+--       range2' = [1,3..lenli]
+--       range1 = R.fromListUnboxed (R.Z R.:. length range1') range1'
+--       range2 = R.fromListUnboxed (R.Z R.:. length range2') range2'
+--   in id li
+--
+-- operateOnListPure :: V.Vector Int -> V.Vector Int
+-- operateOnListPure li =
+--   let numSteps = (floor ((toRational $  V.length li) / 2)) - 2
+--       nbrHood1 = V.map (\x -> (x, (li V.! (pred x) + li V.! (succ x)))) (V.enumFromStepN 2 2 numSteps)
+--       nbrHood2 = V.map (\x -> (x, (li V.! (pred x) + li V.! (succ x)))) (V.enumFromStepN 1 2 numSteps)
+--   in (li `V.update` nbrHood1) `V.update` nbrHood2
+--
+--
+-- type GraphArray m = M.MVector (PrimState m) Double
